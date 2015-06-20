@@ -114,6 +114,11 @@ Doesn't work on other aliens/AI.*/
 			adjustToxLoss(-100)
 			new /obj/effect/alien/weak_acid(get_turf(O), O)
 			visible_message("\green <B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B>")
+			target = O
+			target.add_fingerprint(usr)
+			usr.attack_log +=  text("\[[time_stamp()]\]<font color='green'>[usr.name] spat acid at [target] (X=[target.x];Y=[target.y];Z=[target.z])</font>")
+			if(!istype(target, /obj/item)) //We don't want to log ALL melts, only the ones that matter (structures, mostly). We don't care much if a jumpsuit was melted.
+				msg_admin_attack("[usr.name] ([usr.ckey]) spat acid at [target] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 		else
 			src << "\green Target is too far away."
 	return
@@ -160,6 +165,11 @@ Doesn't work on other aliens/AI.*/
 			adjustToxLoss(-200)
 			new /obj/effect/alien/acid(get_turf(O), O)
 			visible_message("\green <B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B>")
+			target = O
+			target.add_fingerprint(usr)
+			usr.attack_log +=  text("\[[time_stamp()]\]<font color='green'>[usr.name] spat acid at [target] (X=[target.x];Y=[target.y];Z=[target.z])</font>")
+			if(!istype(target, /obj/item)) //We don't want to log ALL melts, only the ones that matter (structures, mostly). We don't care much if a jumpsuit was melted.
+				msg_admin_attack("[usr.name] ([usr.ckey]) spat acid at [target] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 		else
 			src << "\green Target is too far away."
 	return
@@ -199,6 +209,11 @@ Doesn't work on other aliens/AI.*/
 			adjustToxLoss(-300)
 			new /obj/effect/alien/superacid(get_turf(O), O)
 			visible_message("\green <B>[src] vomits globs of vile stuff all over [O]. It begins to sizzle and melt under the bubbling mess of acid!</B>")
+			target = O
+			target.add_fingerprint(usr)
+			usr.attack_log +=  text("\[[time_stamp()]\]<font color='green'>[usr.name] spat acid at [target] (X=[target.x];Y=[target.y];Z=[target.z])</font>")
+			if(!istype(target, /obj/item)) //We don't want to log ALL melts, only the ones that matter (structures, mostly). We don't care much if a jumpsuit was melted.
+				msg_admin_attack("[usr.name] ([usr.ckey]) spat acid at [target] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
 		else
 			src << "\green Target is too far away."
 	return
