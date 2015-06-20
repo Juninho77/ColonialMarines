@@ -53,6 +53,13 @@
 					"<span class='notice'>[user.name] pulls [buckled_mob.name] free from the sticky nest!</span>",\
 					"<span class='notice'>[user.name] pulls you free from the gelatinous resin.</span>",\
 					"<span class='notice'>You hear squelching...</span>")
+					
+				//Adding to logs if it's an alien pulling a human free. It probably isn't, but it doesn't hurt to be careful.
+				var/mob/target = src.buckled_mob
+				if(istype(usr, /mob/living/carbon/alien)) 
+					user.attack_log +=  text("\[[time_stamp()]\]<font color='green'>[usr.name] has pulled [target.name] free from the sticky nest!</font>")
+					msg_admin_attack("[usr.name] ([usr.ckey]) has pulled [target.name] free from the sticky nest! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
+					
 				buckled_mob.pixel_y = 0
 				buckled_mob.nested = null
 				unbuckle()
@@ -133,6 +140,13 @@
 			"<span class='notice'>[user.name] pulls [buckled_mob.name] free from the sticky nest!</span>",\
 			"<span class='notice'>[user.name] pulls you free from the gelatinous resin.</span>",\
 			"<span class='notice'>You hear squelching...</span>")
+		
+		//Adding to logs	
+		var/mob/target = src.buckled_mob
+		if(istype(usr, /mob/living/carbon/alien))   //Double checking to see if it's an alien unbuckling another mob.
+			user.attack_log +=  text("\[[time_stamp()]\]<font color='green'>[usr.name] has pulled [target.name] free from the sticky nest!</font>")
+			msg_admin_attack("[usr.name] ([usr.ckey]) has pulled [target.name] free from the sticky nest! (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[target.x];Y=[target.y];Z=[target.z]'>JMP</a>)")
+
 		buckled_mob.pixel_y = 0
 		buckled_mob.nested = null
 		unbuckle()
