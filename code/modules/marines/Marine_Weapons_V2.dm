@@ -219,18 +219,23 @@
 		set category = "Object"
 		set name = "Eject current magazine"
 		set src in usr
-		playsound(usr, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
-		usr << "\blue You eject the magazine from \the [src]!"
-		empty_mag.desc = "There are [getAmmo()] shells left"
-
+		
 		if(usr.canmove && !usr.stat && !usr.restrained())
-			var/obj/item/ammo_magazine/AM = empty_mag
-			for (var/obj/item/ammo_casing/AC in loaded)
-				AM.stored_ammo += AC
-				loaded -= AC
-				AM.loc = get_turf(src)
-				empty_mag = null
-				update_icon()
+			if (loaded.len)
+				playsound(usr, 'sound/weapons/smg_empty_alarm.ogg', 40, 1)
+				usr << "\blue You eject the magazine from \the [src]!"
+				empty_mag.desc = "There are [getAmmo()] shells left"
+				var/obj/item/ammo_magazine/AM = empty_mag
+				for (var/obj/item/ammo_casing/AC in loaded)
+					AM.stored_ammo += AC
+					loaded -= AC
+					AM.loc = get_turf(src)
+					empty_mag = null
+					update_icon()
+			else
+				usr << "\red Nothing loaded in \the [src]!"
+		
+			
 /*
 	verb/toggle(mob/user)
 		set category = "Object"
