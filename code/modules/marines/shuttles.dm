@@ -172,7 +172,17 @@ proc/move_marine_b_shuttle()
 
 	user << browse("[dat]", "window=miningshuttle;size=200x150")
 
+/obj/machinery/computer/marine_a_shuttle/process() //Make the computers self-repair.
+	if (stat)
+		stat = 0
+	if (icon_state == "shuttleb")
+		icon_state = "shuttle"
 
+/obj/machinery/computer/marine_b_shuttle/process() //Make the computers self-repair.
+	if (stat)
+		stat = 0
+	if (icon_state == "shuttleb")
+		icon_state = "shuttle"
 
 /obj/machinery/computer/marine_a_shuttle/attack_hand(user as mob)
 	if(..(user))
