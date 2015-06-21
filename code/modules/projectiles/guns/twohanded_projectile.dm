@@ -95,6 +95,8 @@
 			user << "\red You attach [A] to [src]. Use 'toggle weapon light' in the Object tab to turn it on."
 			haslight = 1
 			del(A)
+			user.update_inv_l_hand()
+			user.update_inv_r_hand()
 			return
 		else
 			user << "Use a screwdriver to modify the flashlight first."
@@ -146,6 +148,8 @@
 			hasBayonet = 1
 			src.force+=bayonetDamage
 			del(K)
+			user.update_inv_l_hand()
+			user.update_inv_r_hand()
 	return
 
 
