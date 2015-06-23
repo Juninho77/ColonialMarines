@@ -400,8 +400,12 @@
 		item.loc = src.loc
 		if(src.client)
 			src.client.screen -= item
+			
+/*		This is unecessary, for the game already considers thrown items as dropped.
+		In fact, it caused flashlights to execute the dropped(mob/usr) action twice, decreasing the user's luminosity two times.
 		if(istype(item, /obj/item))
 			item:dropped(src) // let it know it's been dropped
+/*
 
 	//actually throw it!
 	if (item)
