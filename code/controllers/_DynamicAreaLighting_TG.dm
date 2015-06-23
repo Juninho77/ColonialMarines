@@ -168,6 +168,7 @@ atom/movable/Del()
 //If we have no light it will create one.
 //If we are setting luminosity to 0 the light will be cleaned up and delted once all its queues are complete
 //if we have a light already it is merely updated
+/*
 atom/proc/SetLuminosity(new_luminosity, max_luminosity = LIGHTING_MAX_LUMINOSITY)
 	if(new_luminosity < 0)
 		new_luminosity = 0
@@ -176,6 +177,21 @@ atom/proc/SetLuminosity(new_luminosity, max_luminosity = LIGHTING_MAX_LUMINOSITY
 		new_luminosity = max_luminosity
 //		if(luminosity != new_luminosity)
 //			world.log << "## WARNING: [type] - LIGHT_MAX_LUMINOSITY exceeded"
+*/
+
+/atom/var/luminosity_actual = 0
+
+atom/proc/SetLuminosity(new_luminosity, max_luminosity = LIGHTING_MAX_LUMINOSITY)
+
+	luminosity_actual += new_luminosity - luminosity  // Calculate the change in luminosity and store it into the variable luminosity_actual.
+	if(luminosity_actual < 0) //This should never happen, but still...
+		luminosity_actual = 0 
+		new_luminosity = 0
+	else if(max_luminosity < luminosity_actual) //Make sure we don't go over the max_luminosity
+		new_luminosity = max_luminosity
+	else
+		new_luminosity = luminosity_actual
+		
 
 	if(isturf(loc))
 		if(light)
